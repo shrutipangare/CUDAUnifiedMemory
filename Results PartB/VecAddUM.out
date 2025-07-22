@@ -1,0 +1,434 @@
+Lmod has detected the following error: The following module(s) are unknown:
+"singularity"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore_cache load "singularity"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+Lmod has detected the following error: The following module(s) are unknown:
+"cuda"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore_cache load "cuda"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+rm -f CPUVecAdd GPUVecAdd VecAddUM *.o
+g++ -o CPUVecAdd CPUVecAdd.cpp -std=c++11
+/usr/local/cuda/bin/nvcc -o GPUVecAdd GPUVecAdd.cu -L/usr/local/cuda/lib64 -L/usr/local/cuda/samples/common/lib/linux/x86_64 -O3 
+/usr/local/cuda/bin/nvcc -o VecAddUM VecAddUM.cu -L/usr/local/cuda/lib64 -L/usr/local/cuda/samples/common/lib/linux/x86_64 -O3 
+make: 'VecAddUM' is up to date.
+K: 1, Grid size: 1, Block size: 1
+==5117== NVPROF is profiling process 5117, command: ./VecAddUM 1 1 1
+Max error: 0
+==5117== Profiling application: ./VecAddUM 1 1 1
+==5117== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  62.337ms         1  62.337ms  62.337ms  62.337ms  add(int, float*, float*)
+      API calls:   63.50%  166.19ms         2  83.094ms  46.209us  166.14ms  cudaMallocManaged
+                   23.82%  62.342ms         1  62.342ms  62.342ms  62.342ms  cudaDeviceSynchronize
+                   12.44%  32.570ms         1  32.570ms  32.570ms  32.570ms  cudaLaunchKernel
+                    0.17%  454.85us         2  227.43us  227.08us  227.77us  cudaFree
+                    0.06%  145.30us       114  1.2740us     150ns  56.466us  cuDeviceGetAttribute
+                    0.00%  10.603us         1  10.603us  10.603us  10.603us  cuDeviceGetName
+                    0.00%  6.4610us         1  6.4610us  6.4610us  6.4610us  cuDeviceGetPCIBusId
+                    0.00%  1.8870us         3     629ns     210ns  1.4570us  cuDeviceGetCount
+                    0.00%  1.1250us         2     562ns     154ns     971ns  cuDeviceGet
+                    0.00%     477ns         1     477ns     477ns     477ns  cuDeviceTotalMem
+                    0.00%     281ns         1     281ns     281ns     281ns  cuModuleGetLoadingMode
+                    0.00%     258ns         1     258ns     258ns     258ns  cuDeviceGetUuid
+
+==5117== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+      48  170.67KB  4.0000KB  0.9961MB  8.000000MB  841.0190us  Host To Device
+      24  170.67KB  4.0000KB  0.9961MB  4.000000MB  354.9750us  Device To Host
+      12         -         -         -           -  2.135220ms  Gpu page fault groups
+Total CPU Page faults: 36
+K: 5, Grid size: 1, Block size: 1
+==5135== NVPROF is profiling process 5135, command: ./VecAddUM 1 1 5
+Max error: 0
+==5135== Profiling application: ./VecAddUM 1 1 5
+==5135== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  282.54ms         1  282.54ms  282.54ms  282.54ms  add(int, float*, float*)
+      API calls:   60.64%  282.55ms         1  282.55ms  282.55ms  282.55ms  cudaDeviceSynchronize
+                   34.49%  160.70ms         2  80.351ms  76.202us  160.63ms  cudaMallocManaged
+                    4.41%  20.535ms         1  20.535ms  20.535ms  20.535ms  cudaLaunchKernel
+                    0.42%  1.9702ms         2  985.11us  864.97us  1.1053ms  cudaFree
+                    0.03%  151.79us       114  1.3310us     143ns  55.766us  cuDeviceGetAttribute
+                    0.00%  14.765us         1  14.765us  14.765us  14.765us  cuDeviceGetName
+                    0.00%  5.7870us         1  5.7870us  5.7870us  5.7870us  cuDeviceGetPCIBusId
+                    0.00%  2.0150us         3     671ns     236ns  1.3850us  cuDeviceGetCount
+                    0.00%     731ns         2     365ns     200ns     531ns  cuDeviceGet
+                    0.00%     473ns         1     473ns     473ns     473ns  cuDeviceTotalMem
+                    0.00%     317ns         1     317ns     317ns     317ns  cuModuleGetLoadingMode
+                    0.00%     260ns         1     260ns     260ns     260ns  cuDeviceGetUuid
+
+==5135== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+     240  170.67KB  4.0000KB  0.9961MB  40.00000MB  4.193828ms  Host To Device
+     120  170.67KB  4.0000KB  0.9961MB  20.00000MB  1.773008ms  Device To Host
+      60         -         -         -           -  15.41314ms  Gpu page fault groups
+Total CPU Page faults: 180
+K: 10, Grid size: 1, Block size: 1
+==5149== NVPROF is profiling process 5149, command: ./VecAddUM 1 1 10
+Max error: 0
+==5149== Profiling application: ./VecAddUM 1 1 10
+==5149== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  542.88ms         1  542.88ms  542.88ms  542.88ms  add(int, float*, float*)
+      API calls:   75.47%  542.89ms         1  542.89ms  542.89ms  542.89ms  cudaDeviceSynchronize
+                   22.61%  162.67ms         2  81.337ms  63.521us  162.61ms  cudaMallocManaged
+                    1.37%  9.8584ms         1  9.8584ms  9.8584ms  9.8584ms  cudaLaunchKernel
+                    0.53%  3.7767ms         2  1.8884ms  1.6500ms  2.1267ms  cudaFree
+                    0.02%  140.13us       114  1.2290us     147ns  53.970us  cuDeviceGetAttribute
+                    0.00%  10.509us         1  10.509us  10.509us  10.509us  cuDeviceGetName
+                    0.00%  6.1570us         1  6.1570us  6.1570us  6.1570us  cuDeviceGetPCIBusId
+                    0.00%  1.7220us         3     574ns     231ns  1.2560us  cuDeviceGetCount
+                    0.00%     729ns         2     364ns     149ns     580ns  cuDeviceGet
+                    0.00%     289ns         1     289ns     289ns     289ns  cuDeviceTotalMem
+                    0.00%     258ns         1     258ns     258ns     258ns  cuModuleGetLoadingMode
+                    0.00%     219ns         1     219ns     219ns     219ns  cuDeviceGetUuid
+
+==5149== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+     480  170.67KB  4.0000KB  0.9961MB  80.00000MB  8.349400ms  Host To Device
+     240  170.67KB  4.0000KB  0.9961MB  40.00000MB  3.535145ms  Device To Host
+     120         -         -         -           -  25.95387ms  Gpu page fault groups
+Total CPU Page faults: 360
+K: 50, Grid size: 1, Block size: 1
+==5163== NVPROF is profiling process 5163, command: ./VecAddUM 1 1 50
+Max error: 0
+==5163== Profiling application: ./VecAddUM 1 1 50
+==5163== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  2.72616s         1  2.72616s  2.72616s  2.72616s  add(int, float*, float*)
+      API calls:   93.48%  2.72618s         1  2.72618s  2.72618s  2.72618s  cudaDeviceSynchronize
+                    5.53%  161.17ms         2  80.585ms  52.467us  161.12ms  cudaMallocManaged
+                    0.63%  18.385ms         2  9.1924ms  7.6887ms  10.696ms  cudaFree
+                    0.36%  10.415ms         1  10.415ms  10.415ms  10.415ms  cudaLaunchKernel
+                    0.01%  172.52us       114  1.5130us     143ns  69.376us  cuDeviceGetAttribute
+                    0.00%  11.024us         1  11.024us  11.024us  11.024us  cuDeviceGetName
+                    0.00%  5.9080us         1  5.9080us  5.9080us  5.9080us  cuDeviceGetPCIBusId
+                    0.00%  1.9060us         3     635ns     197ns  1.5100us  cuDeviceGetCount
+                    0.00%     717ns         1     717ns     717ns     717ns  cuDeviceTotalMem
+                    0.00%     689ns         2     344ns     154ns     535ns  cuDeviceGet
+                    0.00%     225ns         1     225ns     225ns     225ns  cuModuleGetLoadingMode
+                    0.00%     220ns         1     220ns     220ns     220ns  cuDeviceGetUuid
+
+==5163== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+    2400  170.67KB  4.0000KB  0.9961MB  400.0000MB  41.85870ms  Host To Device
+    1200  170.67KB  4.0000KB  0.9961MB  200.0000MB  17.70667ms  Device To Host
+     600         -         -         -           -  142.8911ms  Gpu page fault groups
+Total CPU Page faults: 1800
+K: 100, Grid size: 1, Block size: 1
+==5177== NVPROF is profiling process 5177, command: ./VecAddUM 1 1 100
+Max error: 0
+==5177== Profiling application: ./VecAddUM 1 1 100
+==5177== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  5.43511s         1  5.43511s  5.43511s  5.43511s  add(int, float*, float*)
+      API calls:   96.14%  5.43513s         1  5.43513s  5.43513s  5.43513s  cudaDeviceSynchronize
+                    2.91%  164.33ms         2  82.163ms  64.016us  164.26ms  cudaMallocManaged
+                    0.65%  36.579ms         2  18.289ms  14.956ms  21.623ms  cudaFree
+                    0.30%  16.840ms         1  16.840ms  16.840ms  16.840ms  cudaLaunchKernel
+                    0.00%  163.05us       114  1.4300us     169ns  66.691us  cuDeviceGetAttribute
+                    0.00%  12.714us         1  12.714us  12.714us  12.714us  cuDeviceGetName
+                    0.00%  6.6570us         1  6.6570us  6.6570us  6.6570us  cuDeviceGetPCIBusId
+                    0.00%  2.1030us         3     701ns     245ns  1.5820us  cuDeviceGetCount
+                    0.00%     899ns         2     449ns     182ns     717ns  cuDeviceGet
+                    0.00%     455ns         1     455ns     455ns     455ns  cuDeviceTotalMem
+                    0.00%     385ns         1     385ns     385ns     385ns  cuModuleGetLoadingMode
+                    0.00%     282ns         1     282ns     282ns     282ns  cuDeviceGetUuid
+
+==5177== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+    4800  170.67KB  4.0000KB  0.9961MB  800.0000MB  83.55545ms  Host To Device
+    2400  170.67KB  4.0000KB  0.9961MB  400.0000MB  35.44505ms  Device To Host
+    1200         -         -         -           -  269.0025ms  Gpu page fault groups
+Total CPU Page faults: 3600
+K: 1, Grid size: 1, Block size: 256
+==5196== NVPROF is profiling process 5196, command: ./VecAddUM 1 256 1
+Max error: 0
+==5196== Profiling application: ./VecAddUM 1 256 1
+==5196== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  2.9975ms         1  2.9975ms  2.9975ms  2.9975ms  add(int, float*, float*)
+      API calls:   82.59%  160.01ms         2  80.005ms  42.334us  159.97ms  cudaMallocManaged
+                   15.54%  30.112ms         1  30.112ms  30.112ms  30.112ms  cudaLaunchKernel
+                    1.55%  3.0003ms         1  3.0003ms  3.0003ms  3.0003ms  cudaDeviceSynchronize
+                    0.23%  454.76us         2  227.38us  224.40us  230.36us  cudaFree
+                    0.08%  150.19us       114  1.3170us     150ns  56.502us  cuDeviceGetAttribute
+                    0.01%  11.272us         1  11.272us  11.272us  11.272us  cuDeviceGetName
+                    0.00%  5.8160us         1  5.8160us  5.8160us  5.8160us  cuDeviceGetPCIBusId
+                    0.00%  1.6210us         3     540ns     201ns  1.1730us  cuDeviceGetCount
+                    0.00%     997ns         2     498ns     171ns     826ns  cuDeviceGet
+                    0.00%     523ns         1     523ns     523ns     523ns  cuDeviceTotalMem
+                    0.00%     305ns         1     305ns     305ns     305ns  cuDeviceGetUuid
+                    0.00%     288ns         1     288ns     288ns     288ns  cuModuleGetLoadingMode
+
+==5196== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+      48  170.67KB  4.0000KB  0.9961MB  8.000000MB  833.1180us  Host To Device
+      24  170.67KB  4.0000KB  0.9961MB  4.000000MB  351.5820us  Device To Host
+      12         -         -         -           -  2.294740ms  Gpu page fault groups
+Total CPU Page faults: 36
+K: 5, Grid size: 1, Block size: 256
+==5210== NVPROF is profiling process 5210, command: ./VecAddUM 1 256 5
+Max error: 0
+==5210== Profiling application: ./VecAddUM 1 256 5
+==5210== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  12.102ms         1  12.102ms  12.102ms  12.102ms  add(int, float*, float*)
+      API calls:   86.64%  159.83ms         2  79.913ms  62.124us  159.76ms  cudaMallocManaged
+                    6.56%  12.107ms         1  12.107ms  12.107ms  12.107ms  cudaDeviceSynchronize
+                    5.63%  10.389ms         1  10.389ms  10.389ms  10.389ms  cudaLaunchKernel
+                    1.07%  1.9811ms         2  990.55us  850.05us  1.1311ms  cudaFree
+                    0.08%  152.05us       114  1.3330us     164ns  58.000us  cuDeviceGetAttribute
+                    0.01%  11.887us         1  11.887us  11.887us  11.887us  cuDeviceGetName
+                    0.00%  5.8700us         1  5.8700us  5.8700us  5.8700us  cuDeviceGetPCIBusId
+                    0.00%  1.9930us         3     664ns     227ns  1.5030us  cuDeviceGetCount
+                    0.00%     855ns         2     427ns     173ns     682ns  cuDeviceGet
+                    0.00%     429ns         1     429ns     429ns     429ns  cuDeviceTotalMem
+                    0.00%     289ns         1     289ns     289ns     289ns  cuModuleGetLoadingMode
+                    0.00%     250ns         1     250ns     250ns     250ns  cuDeviceGetUuid
+
+==5210== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+     240  170.67KB  4.0000KB  0.9961MB  40.00000MB  4.152233ms  Host To Device
+     120  170.67KB  4.0000KB  0.9961MB  20.00000MB  1.778966ms  Device To Host
+      63         -         -         -           -  8.609325ms  Gpu page fault groups
+Total CPU Page faults: 180
+K: 10, Grid size: 1, Block size: 256
+==5224== NVPROF is profiling process 5224, command: ./VecAddUM 1 256 10
+Max error: 0
+==5224== Profiling application: ./VecAddUM 1 256 10
+==5224== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  22.931ms         1  22.931ms  22.931ms  22.931ms  add(int, float*, float*)
+      API calls:   78.09%  158.35ms         2  79.177ms  60.548us  158.29ms  cudaMallocManaged
+                   11.31%  22.935ms         1  22.935ms  22.935ms  22.935ms  cudaDeviceSynchronize
+                    8.51%  17.248ms         1  17.248ms  17.248ms  17.248ms  cudaLaunchKernel
+                    2.00%  4.0535ms         2  2.0267ms  1.6816ms  2.3719ms  cudaFree
+                    0.08%  162.82us       114  1.4280us     172ns  58.842us  cuDeviceGetAttribute
+                    0.01%  11.702us         1  11.702us  11.702us  11.702us  cuDeviceGetName
+                    0.00%  6.2410us         1  6.2410us  6.2410us  6.2410us  cuDeviceGetPCIBusId
+                    0.00%  2.1910us         3     730ns     243ns  1.6690us  cuDeviceGetCount
+                    0.00%     794ns         2     397ns     160ns     634ns  cuDeviceGet
+                    0.00%     349ns         1     349ns     349ns     349ns  cuModuleGetLoadingMode
+                    0.00%     342ns         1     342ns     342ns     342ns  cuDeviceTotalMem
+                    0.00%     266ns         1     266ns     266ns     266ns  cuDeviceGetUuid
+
+==5224== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+     480  170.67KB  4.0000KB  0.9961MB  80.00000MB  8.297850ms  Host To Device
+     240  170.67KB  4.0000KB  0.9961MB  40.00000MB  3.538316ms  Device To Host
+     123         -         -         -           -  15.93912ms  Gpu page fault groups
+Total CPU Page faults: 360
+K: 50, Grid size: 1, Block size: 256
+==5238== NVPROF is profiling process 5238, command: ./VecAddUM 1 256 50
+Max error: 0
+==5238== Profiling application: ./VecAddUM 1 256 50
+==5238== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  119.06ms         1  119.06ms  119.06ms  119.06ms  add(int, float*, float*)
+      API calls:   52.45%  161.36ms         2  80.682ms  59.858us  161.30ms  cudaMallocManaged
+                   38.70%  119.08ms         1  119.08ms  119.08ms  119.08ms  cudaDeviceSynchronize
+                    5.99%  18.418ms         2  9.2088ms  7.6663ms  10.751ms  cudaFree
+                    2.80%  8.6269ms         1  8.6269ms  8.6269ms  8.6269ms  cudaLaunchKernel
+                    0.05%  154.46us       114  1.3540us     155ns  63.186us  cuDeviceGetAttribute
+                    0.00%  11.702us         1  11.702us  11.702us  11.702us  cuDeviceGetName
+                    0.00%  6.6040us         1  6.6040us  6.6040us  6.6040us  cuDeviceGetPCIBusId
+                    0.00%  2.2100us         3     736ns     248ns  1.6730us  cuDeviceGetCount
+                    0.00%     988ns         2     494ns     167ns     821ns  cuDeviceGet
+                    0.00%     851ns         1     851ns     851ns     851ns  cuDeviceTotalMem
+                    0.00%     289ns         1     289ns     289ns     289ns  cuModuleGetLoadingMode
+                    0.00%     251ns         1     251ns     251ns     251ns  cuDeviceGetUuid
+
+==5238== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+    2400  170.67KB  4.0000KB  0.9961MB  400.0000MB  41.81438ms  Host To Device
+    1200  170.67KB  4.0000KB  0.9961MB  200.0000MB  17.73267ms  Device To Host
+     623         -         -         -           -  84.13412ms  Gpu page fault groups
+Total CPU Page faults: 1800
+K: 100, Grid size: 1, Block size: 256
+==5252== NVPROF is profiling process 5252, command: ./VecAddUM 1 256 100
+Max error: 0
+==5252== Profiling application: ./VecAddUM 1 256 100
+==5252== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  239.87ms         1  239.87ms  239.87ms  239.87ms  add(int, float*, float*)
+      API calls:   52.45%  239.89ms         1  239.89ms  239.89ms  239.89ms  cudaDeviceSynchronize
+                   36.45%  166.70ms         2  83.352ms  58.362us  166.65ms  cudaMallocManaged
+                    8.03%  36.721ms         2  18.361ms  15.123ms  21.599ms  cudaFree
+                    3.04%  13.903ms         1  13.903ms  13.903ms  13.903ms  cudaLaunchKernel
+                    0.03%  154.21us       114  1.3520us     154ns  62.900us  cuDeviceGetAttribute
+                    0.00%  12.130us         1  12.130us  12.130us  12.130us  cuDeviceGetName
+                    0.00%  5.9660us         1  5.9660us  5.9660us  5.9660us  cuDeviceGetPCIBusId
+                    0.00%  1.8340us         3     611ns     193ns  1.3710us  cuDeviceGetCount
+                    0.00%     730ns         2     365ns     187ns     543ns  cuDeviceGet
+                    0.00%     392ns         1     392ns     392ns     392ns  cuDeviceTotalMem
+                    0.00%     301ns         1     301ns     301ns     301ns  cuModuleGetLoadingMode
+                    0.00%     245ns         1     245ns     245ns     245ns  cuDeviceGetUuid
+
+==5252== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+    4800  170.67KB  4.0000KB  0.9961MB  800.0000MB  83.43780ms  Host To Device
+    2400  170.67KB  4.0000KB  0.9961MB  400.0000MB  35.44977ms  Device To Host
+    1256         -         -         -           -  170.0410ms  Gpu page fault groups
+Total CPU Page faults: 3600
+K: 1, Grid size: 16, Block size: 256
+==5266== NVPROF is profiling process 5266, command: ./VecAddUM 16 256 1
+Max error: 0
+==5266== Profiling application: ./VecAddUM 16 256 1
+==5266== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  1.8256ms         1  1.8256ms  1.8256ms  1.8256ms  add(int, float*, float*)
+      API calls:   93.31%  158.81ms         2  79.406ms  42.963us  158.77ms  cudaMallocManaged
+                    5.28%  8.9886ms         1  8.9886ms  8.9886ms  8.9886ms  cudaLaunchKernel
+                    1.07%  1.8285ms         1  1.8285ms  1.8285ms  1.8285ms  cudaDeviceSynchronize
+                    0.23%  393.63us         2  196.82us  189.52us  204.11us  cudaFree
+                    0.09%  156.27us       114  1.3700us     166ns  59.658us  cuDeviceGetAttribute
+                    0.01%  12.776us         1  12.776us  12.776us  12.776us  cuDeviceGetName
+                    0.00%  6.6670us         1  6.6670us  6.6670us  6.6670us  cuDeviceGetPCIBusId
+                    0.00%  2.0610us         3     687ns     218ns  1.5880us  cuDeviceGetCount
+                    0.00%     920ns         2     460ns     205ns     715ns  cuDeviceGet
+                    0.00%     375ns         1     375ns     375ns     375ns  cuDeviceTotalMem
+                    0.00%     366ns         1     366ns     366ns     366ns  cuModuleGetLoadingMode
+                    0.00%     250ns         1     250ns     250ns     250ns  cuDeviceGetUuid
+
+==5266== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+      48  170.67KB  16.000KB  0.9844MB  8.000000MB  859.0690us  Host To Device
+      24  170.67KB  4.0000KB  0.9961MB  4.000000MB  350.3340us  Device To Host
+      12         -         -         -           -  1.789945ms  Gpu page fault groups
+Total CPU Page faults: 36
+K: 5, Grid size: 16, Block size: 256
+==5280== NVPROF is profiling process 5280, command: ./VecAddUM 16 256 5
+Max error: 0
+==5280== Profiling application: ./VecAddUM 16 256 5
+==5280== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  8.7477ms         1  8.7477ms  8.7477ms  8.7477ms  add(int, float*, float*)
+      API calls:   83.81%  158.72ms         2  79.361ms  62.716us  158.66ms  cudaMallocManaged
+                   10.40%  19.700ms         1  19.700ms  19.700ms  19.700ms  cudaLaunchKernel
+                    4.62%  8.7508ms         1  8.7508ms  8.7508ms  8.7508ms  cudaDeviceSynchronize
+                    1.07%  2.0229ms         2  1.0115ms  875.63us  1.1473ms  cudaFree
+                    0.09%  163.86us       114  1.4370us     159ns  63.354us  cuDeviceGetAttribute
+                    0.01%  11.565us         1  11.565us  11.565us  11.565us  cuDeviceGetName
+                    0.00%  6.6500us         1  6.6500us  6.6500us  6.6500us  cuDeviceGetPCIBusId
+                    0.00%  1.7610us         3     587ns     234ns  1.2910us  cuDeviceGetCount
+                    0.00%     780ns         2     390ns     169ns     611ns  cuDeviceGet
+                    0.00%     386ns         1     386ns     386ns     386ns  cuDeviceTotalMem
+                    0.00%     375ns         1     375ns     375ns     375ns  cuModuleGetLoadingMode
+                    0.00%     260ns         1     260ns     260ns     260ns  cuDeviceGetUuid
+
+==5280== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+     241  169.96KB  4.0000KB  0.9844MB  40.00000MB  4.321645ms  Host To Device
+     120  170.67KB  4.0000KB  0.9961MB  20.00000MB  1.767961ms  Device To Host
+      60         -         -         -           -  8.582964ms  Gpu page fault groups
+Total CPU Page faults: 180
+K: 10, Grid size: 16, Block size: 256
+==5294== NVPROF is profiling process 5294, command: ./VecAddUM 16 256 10
+Max error: 0
+==5294== Profiling application: ./VecAddUM 16 256 10
+==5294== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  17.639ms         1  17.639ms  17.639ms  17.639ms  add(int, float*, float*)
+      API calls:   79.97%  158.09ms         2  79.046ms  60.494us  158.03ms  cudaMallocManaged
+                    9.09%  17.960ms         1  17.960ms  17.960ms  17.960ms  cudaLaunchKernel
+                    8.92%  17.642ms         1  17.642ms  17.642ms  17.642ms  cudaDeviceSynchronize
+                    1.93%  3.8063ms         2  1.9031ms  1.7036ms  2.1026ms  cudaFree
+                    0.08%  162.15us       114  1.4220us     147ns  71.083us  cuDeviceGetAttribute
+                    0.01%  11.025us         1  11.025us  11.025us  11.025us  cuDeviceGetName
+                    0.00%  6.7970us         1  6.7970us  6.7970us  6.7970us  cuDeviceGetPCIBusId
+                    0.00%  1.9170us         3     639ns     219ns  1.4530us  cuDeviceGetCount
+                    0.00%     975ns         2     487ns     144ns     831ns  cuDeviceGet
+                    0.00%     390ns         1     390ns     390ns     390ns  cuDeviceTotalMem
+                    0.00%     291ns         1     291ns     291ns     291ns  cuModuleGetLoadingMode
+                    0.00%     252ns         1     252ns     252ns     252ns  cuDeviceGetUuid
+
+==5294== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+     488  167.87KB  4.0000KB  0.9844MB  80.00000MB  8.657370ms  Host To Device
+     240  170.67KB  4.0000KB  0.9961MB  40.00000MB  3.549205ms  Device To Host
+     120         -         -         -           -  17.31392ms  Gpu page fault groups
+Total CPU Page faults: 360
+K: 50, Grid size: 16, Block size: 256
+==5308== NVPROF is profiling process 5308, command: ./VecAddUM 16 256 50
+Max error: 0
+==5308== Profiling application: ./VecAddUM 16 256 50
+==5308== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  84.910ms         1  84.910ms  84.910ms  84.910ms  add(int, float*, float*)
+      API calls:   58.48%  158.38ms         2  79.188ms  85.071us  158.29ms  cudaMallocManaged
+                   31.35%  84.916ms         1  84.916ms  84.916ms  84.916ms  cudaDeviceSynchronize
+                    6.81%  18.433ms         2  9.2167ms  7.5602ms  10.873ms  cudaFree
+                    3.30%  8.9309ms         1  8.9309ms  8.9309ms  8.9309ms  cudaLaunchKernel
+                    0.06%  161.10us       114  1.4130us     153ns  55.347us  cuDeviceGetAttribute
+                    0.00%  10.745us         1  10.745us  10.745us  10.745us  cuDeviceGetName
+                    0.00%  5.5340us         1  5.5340us  5.5340us  5.5340us  cuDeviceGetPCIBusId
+                    0.00%  1.6990us         3     566ns     217ns  1.2490us  cuDeviceGetCount
+                    0.00%     913ns         2     456ns     167ns     746ns  cuDeviceGet
+                    0.00%     349ns         1     349ns     349ns     349ns  cuDeviceTotalMem
+                    0.00%     334ns         1     334ns     334ns     334ns  cuModuleGetLoadingMode
+                    0.00%     320ns         1     320ns     320ns     320ns  cuDeviceGetUuid
+
+==5308== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+    2453  166.98KB  4.0000KB  0.9883MB  400.0000MB  42.94869ms  Host To Device
+    1200  170.67KB  4.0000KB  0.9961MB  200.0000MB  17.73081ms  Device To Host
+     601         -         -         -           -  83.47694ms  Gpu page fault groups
+Total CPU Page faults: 1800
+K: 100, Grid size: 16, Block size: 256
+==5326== NVPROF is profiling process 5326, command: ./VecAddUM 16 256 100
+Max error: 0
+==5326== Profiling application: ./VecAddUM 16 256 100
+==5326== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  172.99ms         1  172.99ms  172.99ms  172.99ms  add(int, float*, float*)
+      API calls:   45.79%  173.00ms         1  173.00ms  173.00ms  173.00ms  cudaDeviceSynchronize
+                   42.01%  158.73ms         2  79.365ms  61.315us  158.67ms  cudaMallocManaged
+                    9.67%  36.550ms         2  18.275ms  15.257ms  21.293ms  cudaFree
+                    2.47%  9.3481ms         1  9.3481ms  9.3481ms  9.3481ms  cudaLaunchKernel
+                    0.04%  145.74us       114  1.2780us     155ns  55.549us  cuDeviceGetAttribute
+                    0.00%  11.354us         1  11.354us  11.354us  11.354us  cuDeviceGetName
+                    0.00%  5.9980us         1  5.9980us  5.9980us  5.9980us  cuDeviceGetPCIBusId
+                    0.00%  2.3600us         3     786ns     227ns  1.8930us  cuDeviceGetCount
+                    0.00%     724ns         2     362ns     162ns     562ns  cuDeviceGet
+                    0.00%     485ns         1     485ns     485ns     485ns  cuDeviceTotalMem
+                    0.00%     383ns         1     383ns     383ns     383ns  cuModuleGetLoadingMode
+                    0.00%     230ns         1     230ns     230ns     230ns  cuDeviceGetUuid
+
+==5326== Unified Memory profiling result:
+Device "Tesla V100-SXM2-16GB (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+    4928  166.23KB  4.0000KB  0.9961MB  800.0000MB  86.18833ms  Host To Device
+    2400  170.67KB  4.0000KB  0.9961MB  400.0000MB  35.44107ms  Device To Host
+    1221         -         -         -           -  174.2370ms  Gpu page fault groups
+Total CPU Page faults: 3600

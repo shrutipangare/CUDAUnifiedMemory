@@ -1,0 +1,37 @@
+Lmod has detected the following error: The following module(s) are unknown:
+"singularity"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore_cache load "singularity"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+Lmod has detected the following error: The following module(s) are unknown:
+"cuda"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore_cache load "cuda"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+rm -f CPUVecAdd GPUVecAdd GPUVecAddUM *.o
+g++ -o CPUVecAdd CPUVecAdd.cpp -std=c++11
+make: *** No rule to make target 'GPUVecAdd.cu', needed by 'GPUVecAdd'.  Stop.
+K: 1 million, Time: 0.003176 (sec)
+Max error: 0
+K: 5 million, Time: 0.016369 (sec)
+Max error: 0
+K: 10 million, Time: 0.032471 (sec)
+Max error: 0
+K: 50 million, Time: 0.160803 (sec)
+Max error: 0
+K: 100 million, Time: 0.325852 (sec)
+Max error: 0
