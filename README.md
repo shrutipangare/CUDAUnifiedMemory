@@ -64,23 +64,23 @@ cd cuda-unified-memory
   ./VecAddUM [array_size] [threads_per_block] [blocks]
 
 Automated Batch Execution: 
-# CPU performance analysis
+### CPU performance analysis
 bash Batchfiles\ PartB/batchscript_CPUVecAdd.sh
 
-# GPU traditional memory management
+### GPU traditional memory management
 bash Batchfiles\ PartB/batchscript_GPUVecAdd.sh
 
-# GPU with Unified Memory
+### GPU with Unified Memory
 bash Batchfiles\ PartB/batchscript_GPUVecAddUM.sh
 
-## CPU Performance:
+### CPU Performance:
 
 - Execution time scales linearly with array size
 - For K=1 to K=100 million elements: 0.003176s to 0.325852s
 - Serves as baseline for GPU performance comparison
 - Consistent and predictable performance scaling
 
-## GPU Traditional Memory Management:
+### GPU Traditional Memory Management:
 
 - Scenario 1 (1 Block, 1 Thread): Poor performance, slower than CPU for all array sizes
 - Scenario 2 (1 Block, 256 Threads): Moderate improvement, still limited by single block
@@ -88,7 +88,7 @@ bash Batchfiles\ PartB/batchscript_GPUVecAddUM.sh
 - Clear scaling advantage as array size increases
 - Memory transfer overhead becomes negligible for larger datasets
 
-## GPU Unified Memory:
+### GPU Unified Memory:
 
 - Simplified Programming: Eliminates explicit cudaMemcpy calls
 - Performance Impact: Generally slower than traditional GPU approach
