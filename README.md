@@ -65,13 +65,13 @@ cd cuda-unified-memory
 
 Automated Batch Execution: 
 ### CPU performance analysis
-bash Batchfiles\ PartB/batchscript_CPUVecAdd.sh
+Batchfiles\ PartB/batchscript_CPUVecAdd.sh
 
 ### GPU traditional memory management
-bash Batchfiles\ PartB/batchscript_GPUVecAdd.sh
+Batchfiles\ PartB/batchscript_GPUVecAdd.sh
 
 ### GPU with Unified Memory
-bash Batchfiles\ PartB/batchscript_GPUVecAddUM.sh
+Batchfiles\ PartB/batchscript_GPUVecAddUM.sh
 
 ### CPU Performance:
 
